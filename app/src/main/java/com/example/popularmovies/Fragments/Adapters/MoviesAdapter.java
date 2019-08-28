@@ -1,4 +1,4 @@
-package com.example.popularmovies.Fragments;
+package com.example.popularmovies.Fragments.Adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,11 +58,25 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         public void bind(Movie movie)
         {
             title.setText(movie.getTitle());
-            Log.d("IMAGE URL", movie.getPosterPath());
-            Glide.with(itemView)
-                    .load(IMAGE_BASE_URL + movie.getPosterPath())
-                    .apply(new RequestOptions().override(500, 500))
-                    .into(poster);
+            //Log.d("IMAGE URL", movie.getPosterPath());
+
+            //changing all images path to null
+            movie.setPosterPath(null);
+
+            if (movie.getPosterPath()!=null) {
+                Glide.with(itemView)
+                        .load(IMAGE_BASE_URL + movie.getPosterPath())
+                        .apply(new RequestOptions().override(500, 500))
+                        .into(poster);
+            }
+            else
+            {
+                //Do something like putting a placeholder
+                Glide.with(itemView)
+                        .load(R.drawable.transferir)
+                        .apply(new RequestOptions().override(500, 500))
+                        .into(poster);
+            }
         }
     }
 }

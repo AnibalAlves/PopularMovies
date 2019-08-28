@@ -10,7 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.popularmovies.Fragments.MoviesAdapter;
+import com.example.popularmovies.Fragments.Adapters.MoviesAdapter;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.Models.OnGetMoviesCallback;
 import com.example.popularmovies.R;
