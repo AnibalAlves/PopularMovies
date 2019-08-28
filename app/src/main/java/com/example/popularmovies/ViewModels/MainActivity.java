@@ -1,6 +1,8 @@
 package com.example.popularmovies.ViewModels;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +12,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.popularmovies.Fragments.Adapters.MoviesAdapter;
+import com.example.popularmovies.Fragments.Adapters.Adapters.MoviesAdapter;
+import com.example.popularmovies.Fragments.Adapters.Fragment.OffLineFragment;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.Models.OnGetMoviesCallback;
 import com.example.popularmovies.R;
@@ -48,8 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-            Toast.makeText(this,"No internet!",Toast.LENGTH_LONG).show();
+        else {
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.fg1,new OffLineFragment(),"");
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     //check for Internet connectivity

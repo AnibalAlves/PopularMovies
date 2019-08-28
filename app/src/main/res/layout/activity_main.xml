@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ViewModels.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/fg1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@+id/moviesList" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesList"
         android:layout_width="match_parent"

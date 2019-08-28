@@ -1,6 +1,5 @@
-package com.example.popularmovies.Fragments.Adapters;
+package com.example.popularmovies.Fragments.Adapters.Adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             //Log.d("IMAGE URL", movie.getPosterPath());
 
             //changing all images path to null
-            movie.setPosterPath(null);
+            //uncomment to test image not fetched
+            //movie.setPosterPath(null);
 
             if (movie.getPosterPath()!=null) {
                 Glide.with(itemView)
