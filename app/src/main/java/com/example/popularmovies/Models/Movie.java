@@ -13,6 +13,10 @@ public class Movie {
     @Expose
     private String title;
 
+    @SerializedName("poster_path")
+    @Expose
+    private String posterPath;
+
     public int getId(){
         return this.id;
     }
@@ -28,6 +32,14 @@ public class Movie {
 
     public void setTitle(String t){
         this.title=t;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 }
 

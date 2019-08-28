@@ -1,5 +1,6 @@
 package com.example.popularmovies.Fragments;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.R;
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>{
 
     private List<Movie> movies;
+    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
 
     public MoviesAdapter(List<Movie> li)
     {
@@ -40,7 +44,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         return movies.size();
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder
+    {
         ImageButton poster;
         TextView title;
 
@@ -50,8 +55,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             title = itemView.findViewById(R.id.movieName);
         }
 
-        public void bind(Movie movie) {
+        public void bind(Movie movie)
+        {
             title.setText(movie.getTitle());
+            Log.d("IMAGE URL", movie.getPosterPath());
+            Glide.with(itemView)
+                    .load(IMAGE_BASE_URL + movie.getPosterPath())
+                    .into(poster);
         }
     }
 }
