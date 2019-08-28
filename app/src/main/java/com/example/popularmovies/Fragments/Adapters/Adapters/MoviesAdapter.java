@@ -42,8 +42,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public int getItemCount() {
         return movies.size();
     }
-
-    class MovieViewHolder extends RecyclerView.ViewHolder
+    
+    public class MovieViewHolder extends RecyclerView.ViewHolder
     {
         ImageButton poster;
         TextView title;

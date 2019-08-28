@@ -3,6 +3,7 @@ package com.example.popularmovies.ViewModels;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(List<Movie> movies) {
                     adapter = new MoviesAdapter(movies);
                     moviesList.setAdapter(adapter);
+                    moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
                 }
 
                 @Override
