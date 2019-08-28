@@ -61,6 +61,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             Log.d("IMAGE URL", movie.getPosterPath());
             Glide.with(itemView)
                     .load(IMAGE_BASE_URL + movie.getPosterPath())
+                    .apply(new RequestOptions().override(500, 500))
                     .into(poster);
         }
     }
