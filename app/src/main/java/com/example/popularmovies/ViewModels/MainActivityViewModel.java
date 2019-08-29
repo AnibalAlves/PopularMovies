@@ -24,7 +24,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private static MainActivityViewModel repository;
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static final String LANGUAGE = "en-US";
-    private static final String API_KEY = "386ffb49244f44ff9cc21b6ea8f02190";
+    private static final String API_KEY = "";
     TMDbAPI tmDbAPI;
 
     //Singleton pattern in order to allow just 1 instance of repository class
