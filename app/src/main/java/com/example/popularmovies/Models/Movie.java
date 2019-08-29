@@ -1,5 +1,7 @@
 package com.example.popularmovies.Models;
 
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -41,5 +43,17 @@ public class Movie {
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
+
+    public static final DiffUtil.ItemCallback<Movie> CALLBACK = new DiffUtil.ItemCallback<Movie>() {
+        @Override
+        public boolean areItemsTheSame(Movie oldItem, Movie newItem) {
+            return oldItem.id == newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
+            return true;
+        }
+    };
 }
 

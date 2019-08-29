@@ -51,7 +51,7 @@ public class MoviesRepository {
                 if (response.isSuccessful())
                 {
                     MovieHandler movieResponse = response.body();
-                    Log.d("")
+                    //Log.d("bodyResponse",movieResponse.getMovies().toString());
                     if (movieResponse!=null && movieResponse.getMovies()!=null)
                         callback.onSuccess(movieResponse.getMovies());
                     else{
