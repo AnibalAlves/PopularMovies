@@ -12,6 +12,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+/*
+Unused class. Used before implementing paging on the recycler view. Worked just for 1 page fetched from the IMDbAPI
+ */
 public class MoviesRepository {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
