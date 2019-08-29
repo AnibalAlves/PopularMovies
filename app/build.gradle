@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding{
+        enabled=true
+    }
 }
 
 dependencies {
@@ -31,4 +34,10 @@ dependencies {
         exclude group: "com.android.support"
     }
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'android.arch.paging:runtime:1.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    // paging library
+    implementation "android.arch.paging:runtime:1.0.1"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }

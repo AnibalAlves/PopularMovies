@@ -1,47 +1,55 @@
 package com.example.popularmovies.Fragments.Adapters.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.R;
-
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>{
 
-    private List<Movie> movies;
+public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
+
+    Context context;
+    //private List<Movie> movies;
     private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
 
-    public MoviesAdapter(List<Movie> li)
+    public MoviesAdapter(Context context)
     {
-        this.movies=li;
+        super(Movie.CALLBACK);
+        this.context=context;
     }
 
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_list_row, parent,false);
         return new MovieViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position)
     {
-        holder.bind(movies.get(position));
+        //Commented... Original has 2 lines of code here. If implemented, must change movie model class
+        Movie movie = getItem(position);
+        holder.bind(movie);
     }
 
-    @Override
+    /*@Override
     public int getItemCount() {
         return movies.size();
-    }
+    }*/
 
     public class MovieViewHolder extends RecyclerView.ViewHolder
     {
