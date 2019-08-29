@@ -42,7 +42,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public int getItemCount() {
         return movies.size();
     }
-    
+
     public class MovieViewHolder extends RecyclerView.ViewHolder
     {
         ImageButton poster;

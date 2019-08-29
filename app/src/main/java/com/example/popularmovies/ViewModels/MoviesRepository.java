@@ -1,5 +1,7 @@
 package com.example.popularmovies.ViewModels;
 
+import android.util.Log;
+
 import com.example.popularmovies.Models.MovieHandler;
 import com.example.popularmovies.Models.OnGetMoviesCallback;
 import com.example.popularmovies.Models.TMDbAPI;
@@ -43,12 +45,13 @@ public class MoviesRepository {
     public void getMovies(final OnGetMoviesCallback callback)
     {
         //change the page number to correspond to the requested movies loaded per page
-        api.getPopularMovies(API_KEY, LANGUAGE, 1).enqueue(new Callback<MovieHandler>() {
+        api.getPopularMovies(API_KEY, LANGUAGE, 2).enqueue(new Callback<MovieHandler>() {
             @Override
             public void onResponse(Call<MovieHandler> call, Response<MovieHandler> response) {
                 if (response.isSuccessful())
                 {
                     MovieHandler movieResponse = response.body();
+                    Log.d("")
                     if (movieResponse!=null && movieResponse.getMovies()!=null)
                         callback.onSuccess(movieResponse.getMovies());
                     else{

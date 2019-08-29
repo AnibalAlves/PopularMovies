@@ -1,6 +1,9 @@
 package com.example.popularmovies.Fragments.Adapters.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,8 +37,26 @@ public class OffLineFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        Log.d("CLICKING REFRESH","REFRESHING");
-        Intent tryConnection = new Intent(getActivity(), MainActivity.class);
-        startActivity(tryConnection);
+        //Log.d("CLICKING REFRESH","REFRESHING");
+        if (isNetworkAvailable()) {
+            Intent tryConnection = new Intent(getActivity(), MainActivity.class);
+            startActivity(tryConnection);
+        }
+    }
+
+    //check for Internet connectivity
+    private boolean isNetworkAvailable()
+    {
+        if (getActivity()!=null) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            Log.d("TEST_INTERNET", "true");
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        else
+        {
+            Log.d("TEST_INTERNET", "false");
+            return false;
+        }
     }
 }
