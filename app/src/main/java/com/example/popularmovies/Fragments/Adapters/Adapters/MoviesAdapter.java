@@ -44,11 +44,6 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
         holder.bind(movie);
     }
 
-    /*@Override
-    public int getItemCount() {
-        return movies.size();
-    }*/
-
     public class MovieViewHolder extends RecyclerView.ViewHolder
     {
         ImageButton poster;
@@ -63,16 +58,10 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
         public void bind(Movie movie)
         {
             title.setText(movie.getTitle());
-            //Log.d("IMAGE URL", movie.getPosterPath());
-
-            //changing all images path to null
-            //uncomment to test image not fetched
-            //movie.setPosterPath(null);
-
             if (movie.getPosterPath()!=null) {
                 Glide.with(itemView)
                         .load(IMAGE_BASE_URL + movie.getPosterPath())
-                        .apply(new RequestOptions().override(500, 500))
+                        .apply(new RequestOptions().override(300, 300))
                         .into(poster);
             }
             else
@@ -80,7 +69,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
                 //Do something like putting a placeholder
                 Glide.with(itemView)
                         .load(R.drawable.transferir)
-                        .apply(new RequestOptions().override(500, 500))
+                        .apply(new RequestOptions().override(300, 300))
                         .into(poster);
             }
         }
