@@ -61,7 +61,7 @@ public class MainActivityViewModel extends AndroidViewModel {
         moviesPagedList = (new LivePagedListBuilder<Long, Movie>(factory,config))
                 .setFetchExecutor(executor)
                 .build();
-        Log.d("TESTTT",String.valueOf(moviesPagedList.hasObservers()));
+        Log.d("TESTTT","LiveData pagedList " + String.valueOf(moviesPagedList.hasObservers()));
     }
 
     public LiveData<PagedList<Movie>> getMoviesPagedList(){

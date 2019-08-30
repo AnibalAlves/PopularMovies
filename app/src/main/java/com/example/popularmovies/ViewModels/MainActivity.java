@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MOVIE_SIZE",String.valueOf(movies.size()));
         MoviesAdapter moviesAdapter = new MoviesAdapter(this);
         moviesAdapter.submitList(movies);
-        moviesList.setLayoutManager(new LinearLayoutManager(this));
+        moviesList.setLayoutManager(new GridLayoutManager(this,3));
         moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         moviesList.setAdapter(moviesAdapter);
         moviesAdapter.notifyDataSetChanged();

@@ -22,7 +22,7 @@ public class MovieDataSourceFactory extends MovieDataSource.Factory {
     @Override
     public DataSource create() {
         movieDataSource = new MovieDataSource(tmDbAPI);
-        //Log.d("TESTTT",movieDataSource.toString());
+        Log.d("TESTTT",movieDataSource.toString());
         mutableLiveData.postValue(movieDataSource);
         return movieDataSource;
     }

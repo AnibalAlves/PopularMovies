@@ -1,6 +1,7 @@
 package com.example.popularmovies.Fragments.Adapters.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
     {
         //Commented... Original has 2 lines of code here. If implemented, must change movie model class
         Movie movie = getItem(position);
+        Log.d("TESTTT","Movir title " + movie.getTitle());
         holder.bind(movie);
     }
 
