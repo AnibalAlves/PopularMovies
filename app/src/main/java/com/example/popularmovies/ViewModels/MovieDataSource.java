@@ -93,7 +93,7 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
 
         if (isConnectedToNetwork(context)) {
             liveData.postValue(true);
-            tmDbAPI.getPopularMovies(API_KEY, LANGUAGE, Math.toIntExact(params.key)).enqueue(new Callback<MovieHandler>() {
+            tmDbAPI.getPopularMovies(API_KEY, LANGUAGE, Math.toIntExact(params.key)+1).enqueue(new Callback<MovieHandler>() {
                 @Override
                 public void onResponse(Call<MovieHandler> call, Response<MovieHandler> response) {
                     if (response.isSuccessful()) {
@@ -117,6 +117,8 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
             liveData.postValue(false);
         }
     }
+
+    //check for internetConnectivity
     public static boolean isConnectedToNetwork(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -128,6 +130,7 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
         return isConnected;
     }
 
+    //return boolean to observers
     public LiveData<Boolean> getInternetConnection()
     {
         return liveData;

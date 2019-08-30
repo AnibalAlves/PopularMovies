@@ -53,9 +53,9 @@ public class MainActivityViewModel extends AndroidViewModel {
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(true)
-                .setInitialLoadSizeHint(9)
-                .setPageSize(20)
-                .setPrefetchDistance(20)
+                .setInitialLoadSizeHint(21)
+                .setPageSize(20) //9 movies per page
+                .setPrefetchDistance(11) //after 9th movie, fetch another 15
                 .build();
 
         executor = Executors.newFixedThreadPool(1);
@@ -70,7 +70,4 @@ public class MainActivityViewModel extends AndroidViewModel {
         return moviesPagedList;
     }
 
-    /*public LiveData<Boolean> getInternetConnection(){
-        return false;
-    }*/
 }

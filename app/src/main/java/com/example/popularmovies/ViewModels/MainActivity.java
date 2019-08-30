@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = new MainActivityViewModel(app,this);
         movieDataSource = new MovieDataSource(tmDbAPI,this);
         moviesList = findViewById(R.id.moviesList);
+        moviesList.setLayoutManager(new GridLayoutManager(this,3));
+        moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         ll = findViewById(R.id.offLayout);
         if (isNetworkAvailable()) {
             getMovies();
@@ -83,30 +85,21 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("StateOfView",String.valueOf(aBoolean));
                 if (!aBoolean)
                     ll.setVisibility(View.VISIBLE);
-                else
-                    ll.setVisibility(View.GONE);
             }
         });
     }
 
-    public void showOffView()
-    {
-        LinearLayout offLayout = findViewById(R.id.offLayout);
-        offLayout.setVisibility(View.VISIBLE);
-    }
-
     private void showOnRecyclerView(){
-        //moviesList = recyclerView
-        //Log.d("MOVIE_SIZE",String.valueOf(movies.size()));
         MoviesAdapter moviesAdapter = new MoviesAdapter(this);
         moviesAdapter.submitList(movies);
-        moviesList.setLayoutManager(new GridLayoutManager(this,3));
-        moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         moviesList.setAdapter(moviesAdapter);
         moviesAdapter.notifyDataSetChanged();
     }
 
+    //clicking refresh button after Internet Connection was lost
     public void refreshNet(View view) {
-        
+        Log.d("ClickedRe","Clicked refresh");
+        ll.setVisibility(View.GONE);
+        getMovies();
     }
 }
