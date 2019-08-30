@@ -2,6 +2,8 @@ package com.example.popularmovies.ViewModels;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -68,6 +70,17 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<PagedList<Movie>> getMoviesPagedList(){
         return moviesPagedList;
+    }
+
+    //check for Internet connectivity
+    public boolean isNetworkAvailable(Context context)
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

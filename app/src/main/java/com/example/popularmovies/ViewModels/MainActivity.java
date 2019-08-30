@@ -1,9 +1,6 @@
 package com.example.popularmovies.ViewModels;
 
 import android.app.Application;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         moviesList.setLayoutManager(new GridLayoutManager(this,3));
         moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         ll = findViewById(R.id.offLayout);
-        if (isNetworkAvailable()) {
+        if (mainActivityViewModel.isNetworkAvailable(this)) {
             getMovies();
         }
         else {
@@ -54,17 +51,6 @@ public class MainActivity extends AppCompatActivity {
             transaction.addToBackStack(null);
             transaction.commit();
         }
-    }
-
-    //check for Internet connectivity
-    private boolean isNetworkAvailable()
-    {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = null;
-        if (connectivityManager != null) {
-            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        }
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public void getMovies()
