@@ -1,7 +1,6 @@
 package com.example.popularmovies.Fragments.Adapters.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.R;
-import java.util.List;
 
 
 public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
@@ -44,14 +41,8 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
     {
         //Commented... Original has 2 lines of code here. If implemented, must change movie model class
         Movie movie = getItem(position);
-        Log.d("TESTTT","Movir title " + movie.getTitle());
         holder.bind(movie);
     }
-
-    /*@Override
-    public int getItemCount() {
-        return movies.size();
-    }*/
 
     public class MovieViewHolder extends RecyclerView.ViewHolder
     {
@@ -67,16 +58,10 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
         public void bind(Movie movie)
         {
             title.setText(movie.getTitle());
-            //Log.d("IMAGE URL", movie.getPosterPath());
-
-            //changing all images path to null
-            //uncomment to test image not fetched
-            //movie.setPosterPath(null);
-
             if (movie.getPosterPath()!=null) {
                 Glide.with(itemView)
                         .load(IMAGE_BASE_URL + movie.getPosterPath())
-                        .apply(new RequestOptions().override(500, 500))
+                        .apply(new RequestOptions().override(300, 300))
                         .into(poster);
             }
             else
@@ -84,7 +69,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
                 //Do something like putting a placeholder
                 Glide.with(itemView)
                         .load(R.drawable.transferir)
-                        .apply(new RequestOptions().override(500, 500))
+                        .apply(new RequestOptions().override(300, 300))
                         .into(poster);
             }
         }

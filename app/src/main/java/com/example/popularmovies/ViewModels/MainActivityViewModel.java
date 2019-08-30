@@ -1,7 +1,7 @@
 package com.example.popularmovies.ViewModels;
 
 import android.app.Application;
-import android.util.Log;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -26,6 +26,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private static final String LANGUAGE = "en-US";
     private static final String API_KEY = "";
     TMDbAPI tmDbAPI;
+    private static Context context;
 
     //Singleton pattern in order to allow just 1 instance of repository class
     public static TMDbAPI getInstance()
@@ -43,28 +44,33 @@ public class MainActivityViewModel extends AndroidViewModel {
             return repository.tmDbAPI;
     }
 
-    public MainActivityViewModel(@NonNull Application application)
+    public MainActivityViewModel(@NonNull Application application, Context context)
     {
         super(application);
+        this.context=context;
         tmDbAPI = getInstance();
-        MovieDataSourceFactory factory = new MovieDataSourceFactory(tmDbAPI);
+        MovieDataSourceFactory factory = new MovieDataSourceFactory(tmDbAPI,context);
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(true)
                 .setInitialLoadSizeHint(9)
-                .setPageSize(9)
-                .setPrefetchDistance(9)
+                .setPageSize(20)
+                .setPrefetchDistance(20)
                 .build();
 
-        executor = Executors.newFixedThreadPool(5);
+        executor = Executors.newFixedThreadPool(1);
 
+        //
         moviesPagedList = (new LivePagedListBuilder<Long, Movie>(factory,config))
                 .setFetchExecutor(executor)
                 .build();
-        Log.d("TESTTT","LiveData pagedList " + String.valueOf(moviesPagedList.hasObservers()));
     }
 
     public LiveData<PagedList<Movie>> getMoviesPagedList(){
         return moviesPagedList;
     }
+
+    /*public LiveData<Boolean> getInternetConnection(){
+        return false;
+    }*/
 }
