@@ -27,13 +27,13 @@ public class Movie {
         return this.title;
     }
 
-    public void setId(int i)
+    public void setId(int id)
     {
-        this.id=i;
+        this.id=id;
     }
 
-    public void setTitle(String t){
-        this.title=t;
+    public void setTitle(String title){
+        this.title=title;
     }
 
     public String getPosterPath() {

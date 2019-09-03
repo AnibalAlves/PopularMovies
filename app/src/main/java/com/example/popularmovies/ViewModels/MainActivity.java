@@ -20,6 +20,7 @@ import com.example.popularmovies.Fragments.Adapters.Fragment.OffLineFragment;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.Models.TMDbAPI;
 import com.example.popularmovies.R;
+import com.example.popularmovies.Utils.NetworkAvailability;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,18 +31,20 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout ll;
     Application app;
     private TMDbAPI tmDbAPI;
+    NetworkAvailability netAvailable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         app = new Application();
+        netAvailable = new NetworkAvailability(this);
         mainActivityViewModel = new MainActivityViewModel(app,this);
         movieDataSource = new MovieDataSource(tmDbAPI,this);
         moviesList = findViewById(R.id.moviesList);
         moviesList.setLayoutManager(new GridLayoutManager(this,3));
         moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         ll = findViewById(R.id.offLayout);
-        if (mainActivityViewModel.isNetworkAvailable(this)) {
+        if (netAvailable.isConnectedToNetwork(this)) {
             getMovies();
         }
         else {

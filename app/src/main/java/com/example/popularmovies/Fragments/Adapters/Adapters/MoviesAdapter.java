@@ -22,6 +22,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
     Context context;
     //private List<Movie> movies;
     private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
+    private static int widthSize=400, heightSize=400;
 
     public MoviesAdapter(Context context)
     {
@@ -61,7 +62,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
             if (movie.getPosterPath()!=null) {
                 Glide.with(itemView)
                         .load(IMAGE_BASE_URL + movie.getPosterPath())
-                        .apply(new RequestOptions().override(300, 300))
+                        .apply(new RequestOptions().override(widthSize, heightSize))
                         .into(poster);
             }
             else
@@ -69,7 +70,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
                 //Do something like putting a placeholder
                 Glide.with(itemView)
                         .load(R.drawable.transferir)
-                        .apply(new RequestOptions().override(300, 300))
+                        .apply(new RequestOptions().override(widthSize, heightSize))
                         .into(poster);
             }
         }

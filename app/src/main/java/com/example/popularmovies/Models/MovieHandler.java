@@ -39,18 +39,18 @@ public class MovieHandler {
         return this.totalPages;
     }
 
-    public void setPage(int p){
-        this.page=p;
+    public void setPage(int page){
+        this.page=page;
     }
-    public void setTotalResults(int tr){
-        this.totalResults=tr;
+    public void setTotalResults(int totalResults){
+        this.totalResults=totalResults;
     }
-    public void setMovies(List<Movie> mvs)
+    public void setMovies(List<Movie> movies)
     {
-        this.movies=mvs;
+        this.movies=movies;
     }
-    public void setTotalPages(int tp){
-        this.totalPages=tp;
+    public void setTotalPages(int totalPages){
+        this.totalPages=totalPages;
     }
 
 }

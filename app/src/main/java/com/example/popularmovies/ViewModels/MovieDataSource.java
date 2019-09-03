@@ -1,8 +1,6 @@
 package com.example.popularmovies.ViewModels;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -14,6 +12,7 @@ import androidx.paging.PageKeyedDataSource;
 import com.example.popularmovies.Models.Movie;
 import com.example.popularmovies.Models.MovieHandler;
 import com.example.popularmovies.Models.TMDbAPI;
+import com.example.popularmovies.Utils.NetworkAvailability;
 
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
         tmDbAPI = getInstance();
         //check here for Internet Connection
 
-        if (isConnectedToNetwork(context)) {
+        if (NetworkAvailability.isConnectedToNetwork(context)) {
             liveData.postValue(true);
             tmDbAPI.getPopularMovies(API_KEY, LANGUAGE, Math.toIntExact(params.key)+1).enqueue(new Callback<MovieHandler>() {
                 @Override
@@ -116,18 +115,6 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
         else{ //NO internet connection
             liveData.postValue(false);
         }
-    }
-
-    //check for internetConnectivity
-    public static boolean isConnectedToNetwork(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        boolean isConnected = false;
-        if (connectivityManager != null) {
-            NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-            isConnected = (activeNetwork != null) && (activeNetwork.isConnectedOrConnecting());
-        }
-        return isConnected;
     }
 
     //return boolean to observers
