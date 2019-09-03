@@ -1,6 +1,5 @@
 package com.example.popularmovies.Fragments.Adapters.Adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +18,12 @@ import com.example.popularmovies.R;
 
 public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
 
-    Context context;
     //private List<Movie> movies;
-    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
     private static int widthSize=400, heightSize=400;
 
-    public MoviesAdapter(Context context)
+    public MoviesAdapter()
     {
         super(Movie.CALLBACK);
-        this.context=context;
     }
 
     @Override
@@ -61,7 +57,7 @@ public class MoviesAdapter extends PagedListAdapter<Movie, MoviesAdapter.MovieVi
             title.setText(movie.getTitle());
             if (movie.getPosterPath()!=null) {
                 Glide.with(itemView)
-                        .load(IMAGE_BASE_URL + movie.getPosterPath())
+                        .load(movie.getIMAGE_BASE_URL() + movie.getPosterPath())
                         .apply(new RequestOptions().override(widthSize, heightSize))
                         .into(poster);
             }

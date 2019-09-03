@@ -1,8 +1,7 @@
-package com.example.popularmovies.ViewModels;
+package com.example.popularmovies.View;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -18,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.popularmovies.Fragments.Adapters.Adapters.MoviesAdapter;
 import com.example.popularmovies.Fragments.Adapters.Fragment.OffLineFragment;
 import com.example.popularmovies.Models.Movie;
-import com.example.popularmovies.Models.TMDbAPI;
 import com.example.popularmovies.R;
 import com.example.popularmovies.Utils.NetworkAvailability;
+import com.example.popularmovies.ViewModels.MovieDataSource;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,21 +29,18 @@ public class MainActivity extends AppCompatActivity {
     private MovieDataSource movieDataSource;
     LinearLayout ll;
     Application app;
-    private TMDbAPI tmDbAPI;
-    NetworkAvailability netAvailable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         app = new Application();
-        netAvailable = new NetworkAvailability(this);
         mainActivityViewModel = new MainActivityViewModel(app,this);
-        movieDataSource = new MovieDataSource(tmDbAPI,this);
+        movieDataSource = new MovieDataSource(this);
         moviesList = findViewById(R.id.moviesList);
         moviesList.setLayoutManager(new GridLayoutManager(this,3));
         moviesList.addItemDecoration(new DividerItemDecoration(moviesList.getContext(), DividerItemDecoration.VERTICAL));
         ll = findViewById(R.id.offLayout);
-        if (netAvailable.isConnectedToNetwork(this)) {
+        if (NetworkAvailability.isConnectedToNetwork(this)) {
             getMovies();
         }
         else {
@@ -63,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(PagedList<Movie> moviesFromLiveData) {
                 movies = moviesFromLiveData;
-                Log.d("TESTTT",String.valueOf(movies.size()));
                 showOnRecyclerView();
             }
         });
@@ -71,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         movieDataSource.getInternetConnection().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                Log.d("StateOfView",String.valueOf(aBoolean));
                 if (!aBoolean)
                     ll.setVisibility(View.VISIBLE);
             }
@@ -79,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showOnRecyclerView(){
-        MoviesAdapter moviesAdapter = new MoviesAdapter(this);
+        MoviesAdapter moviesAdapter = new MoviesAdapter();
         moviesAdapter.submitList(movies);
         moviesList.setAdapter(moviesAdapter);
         moviesAdapter.notifyDataSetChanged();
@@ -87,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
     //clicking refresh button after Internet Connection was lost
     public void refreshNet(View view) {
-        Log.d("ClickedRe","Clicked refresh");
         ll.setVisibility(View.GONE);
         getMovies();
     }

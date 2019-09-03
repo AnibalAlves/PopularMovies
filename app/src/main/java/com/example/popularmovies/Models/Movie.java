@@ -19,6 +19,12 @@ public class Movie {
     @Expose
     private String posterPath;
 
+    private String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
+
+    public String getIMAGE_BASE_URL(){return this.IMAGE_BASE_URL;}
+
+    public void setIMAGE_BASE_URL(String IMAGE_BASE_URL){this.IMAGE_BASE_URL=IMAGE_BASE_URL;}
+
     public int getId(){
         return this.id;
     }

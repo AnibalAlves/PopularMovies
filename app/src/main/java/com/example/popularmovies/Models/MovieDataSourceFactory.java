@@ -1,33 +1,31 @@
-package com.example.popularmovies.ViewModels;
+package com.example.popularmovies.Models;
 
 import android.content.Context;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 
-import com.example.popularmovies.Models.TMDbAPI;
+import com.example.popularmovies.ViewModels.MovieDataSource;
 
 
 /*
 Class responsible for creating MovieDataSource for fetching new Movie pages
  */
-public class MovieDataSourceFactory extends MovieDataSource.Factory {
+public class MovieDataSourceFactory extends DataSource.Factory {
 
     private MovieDataSource movieDataSource;
-    private TMDbAPI tmDbAPI;
     private MutableLiveData<MovieDataSource> mutableLiveData;
     private static Context context;
 
-    public MovieDataSourceFactory(TMDbAPI tmDbAPI, Context context)
+    public MovieDataSourceFactory(Context context)
     {
-        this.tmDbAPI = tmDbAPI;
         this.context=context;
         mutableLiveData=new MutableLiveData<>();
     }
 
     @Override
     public DataSource create() {
-        movieDataSource = new MovieDataSource(tmDbAPI,context);
+        movieDataSource = new MovieDataSource(context);
         mutableLiveData.postValue(movieDataSource);
         return movieDataSource;
     }

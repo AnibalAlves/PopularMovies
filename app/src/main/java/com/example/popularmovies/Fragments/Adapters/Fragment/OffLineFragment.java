@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.popularmovies.R;
-import com.example.popularmovies.ViewModels.MainActivity;
+import com.example.popularmovies.View.MainActivity;
 
 public class OffLineFragment extends Fragment implements View.OnClickListener {
 
